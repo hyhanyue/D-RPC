@@ -1,4 +1,7 @@
-package com.rpc.drpc.entity;
+package com.drpc.rpc.client.entity;
+
+import lombok.Builder;
+import lombok.Data;
 
 import java.io.Serializable;
 
@@ -8,6 +11,8 @@ import java.io.Serializable;
  * @Author hy-ha
  * @Date 2022/1/25 10:46
  */
+@Data
+@Builder
 public class RPCRequest implements Serializable {
     /**
      * 待调用接口名称

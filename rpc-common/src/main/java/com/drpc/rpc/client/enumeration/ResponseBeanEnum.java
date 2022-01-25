@@ -1,4 +1,4 @@
-package com.rpc.drpc.enumeration;
+package com.drpc.rpc.client.enumeration;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

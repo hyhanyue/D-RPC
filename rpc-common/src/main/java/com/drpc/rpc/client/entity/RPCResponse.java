@@ -1,6 +1,6 @@
-package com.rpc.drpc.entity;
+package com.drpc.rpc.client.entity;
 
-import com.rpc.drpc.enumeration.ResponseBeanEnum;
+import com.drpc.rpc.client.enumeration.ResponseBeanEnum;
 import lombok.Data;
 
 import java.io.Serializable;
