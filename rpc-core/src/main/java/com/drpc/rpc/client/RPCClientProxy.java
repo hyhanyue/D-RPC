@@ -35,11 +35,12 @@ public class RPCClientProxy implements InvocationHandler {
         //客户端向服务端传输的对象,Builder模式生成
         RPCRequest rpcRequest = RPCRequest.builder()
                 .interfaceName(method.getDeclaringClass().getName())
+                .methodName(method.getName())
                 .parameters(args)
                 .paramTypes(method.getParameterTypes())
                 .build();
         //进行远程调用的客户端
         RPCClient rpcClient = new RPCClient();
-        return ((RPCResponse) rpcClient.sendRequest(rpcRequest, host, port));
+        return ((RPCResponse) rpcClient.sendRequest(rpcRequest, host, port)).getData();
     }
 }

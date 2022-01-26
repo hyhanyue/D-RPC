@@ -17,7 +17,7 @@ import java.net.Socket;
  */
 public class RPCClient {
     private static final Logger logger = LoggerFactory.getLogger(RPCClient.class);
-    public Object sendRequest(RPCRequest request,String host,int port){
+    public Object sendRequest(RPCRequest rpcRequest,String host,int port){
         /**
          * socket套接字实现TCP网络传输
          * try()中一般放对资源的申请，若{}出现异常，()资源会自动关闭
@@ -25,7 +25,7 @@ public class RPCClient {
         try (Socket socket = new Socket(host, port)) {
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
             ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
-            objectOutputStream.writeObject(request);
+            objectOutputStream.writeObject(rpcRequest);
             objectOutputStream.flush();
             return objectInputStream.readObject();
         } catch (IOException | ClassNotFoundException e) {

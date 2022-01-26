@@ -26,6 +26,7 @@ public class RPCResponse<T> implements Serializable {
      */
     private T data;
 
+
     public static <T> RPCResponse<T> success(T data){
         RPCResponse<T> response = new RPCResponse<>();
         response.setStatusCode(ResponseBeanEnum.SUCCESS.getCode());
@@ -33,13 +34,11 @@ public class RPCResponse<T> implements Serializable {
         return response;
     }
 
-    public static <T> RPCResponse<T> error(ResponseBeanEnum code){
+
+    public static <T> RPCResponse<T> fail(ResponseBeanEnum code){
         RPCResponse<T> response = new RPCResponse<>();
         response.setStatusCode(code.getCode());
         response.setMessage(code.getMessage());
         return response;
     }
-
-
-
 }
