@@ -2,6 +2,8 @@ package com.drpc.rpc.client;
 
 import com.drpc.rpc.client.entity.RPCRequest;
 import com.drpc.rpc.client.entity.RPCResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
@@ -14,10 +16,11 @@ import java.lang.reflect.Proxy;
  * @Date 2022/1/25 15:09
  */
 public class RPCClientProxy implements InvocationHandler {
+    private static final Logger logger = LoggerFactory.getLogger(RPCClientProxy.class);
     private String host;
     private int port;
 
-    public RPCClientProxy(String host, int port) {
+    public RPCClientProxy(String host, int port){
         this.host = host;
         this.port = port;
     }
@@ -29,10 +32,10 @@ public class RPCClientProxy implements InvocationHandler {
         return (T) Proxy.newProxyInstance(clazz.getClassLoader(), new Class<?>[]{clazz}, this);
     }
 
-
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-        //客户端向服务端传输的对象,Builder模式生成
+        logger.info("调用方法：{}#{}", method.getDeclaringClass().getName(), method.getName());
+        //客户端向服务端传输的对象,Builder模式生成,利用反射获取相关信息
         RPCRequest rpcRequest = RPCRequest.builder()
                 .interfaceName(method.getDeclaringClass().getName())
                 .methodName(method.getName())
@@ -41,6 +44,6 @@ public class RPCClientProxy implements InvocationHandler {
                 .build();
         //进行远程调用的客户端
         RPCClient rpcClient = new RPCClient();
-        return ((RPCResponse) rpcClient.sendRequest(rpcRequest, host, port)).getData();
+        return  rpcClient.sendRequest(rpcRequest, host, port);
     }
 }

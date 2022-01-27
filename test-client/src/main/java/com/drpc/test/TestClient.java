@@ -6,7 +6,7 @@ import com.drpc.rpc.client.RPCClientProxy;
 
 /**
  * @ClassName TestClient
- * @Description TODO
+ * @Description TODO 客户端
  * @Author hy-ha
  * @Date 2022/1/26 11:04
  */
